@@ -25,15 +25,24 @@ df %>% glimpse
 # Algorithms don't like missing values. It messes with the math.
 
 # Get a feel for the missingness
-
+df |> 
+  summarize(across(everything(), ~sum(is.na(.x))))
 
 
 # first check: is the missingness relevant?
 # use summarize across
+df |> 
+  group_by(survived) |> 
+  summarize(across(everything(), ~sum(is.na(.x))))
 
+df |> 
+  group_by(is.na(age)) |> 
+  summarize(across(everything(), ~mean(.x, na.rm =T)))
+df |> count(survived)
 
 # fill in missing age values, check our work
-
+df |> 
+  mutate(was_age_missing = ifelse())
 
 # now handle embarked, this time using replace_na()
 # Again, check our work
