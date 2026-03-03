@@ -26,9 +26,12 @@ df %>% glimpse
 
 # Get a feel for the missingness
 <<<<<<< HEAD
+<<<<<<< HEAD
 df |> 
   summarize(across(everything(), ~sum(is.na(.x))))
 =======
+=======
+>>>>>>> upstream/main
 df %>% 
   summarize(across(everything(), ~sum(is.na(.x))))
 
@@ -38,9 +41,15 @@ df %>%
 # first check: is the missingness relevant?
 # use summarize across
 <<<<<<< HEAD
+<<<<<<< HEAD
 df |> 
   group_by(survived) |> 
   summarize(across(everything(), ~sum(is.na(.x))))
+=======
+df %>% 
+  group_by(is.na(age)) %>% 
+  summarize(across(everything(), ~mean(.x, na.rm =T)))
+>>>>>>> upstream/main
 =======
 df %>% 
   group_by(is.na(age)) %>% 
@@ -54,9 +63,16 @@ df |> count(survived)
 
 # fill in missing age values, check our work
 <<<<<<< HEAD
+<<<<<<< HEAD
 df |> 
   mutate(was_age_missing = ifelse())
 
+=======
+df <- df %>% 
+  mutate(age = if_else(is.na(age), mean(age, na.rm = T), age))
+
+mean(df$age)
+>>>>>>> upstream/main
 =======
 df <- df %>% 
   mutate(age = if_else(is.na(age), mean(age, na.rm = T), age))
